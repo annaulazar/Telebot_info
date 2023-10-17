@@ -9,8 +9,15 @@ class Bots:
 
 
 @dataclass
+class Apis:
+    weather_key: str
+    geo_key: str
+
+
+@dataclass
 class Config:
     bot: Bots
+    apis: Apis
 
 
 def get_config():
@@ -18,6 +25,10 @@ def get_config():
     return Config(
         bot=Bots(
             bot_token=os.getenv('BOT_TOKEN')
+        ),
+        apis=Apis(
+            weather_key=os.getenv('Y.WEATHER_KEY'),
+            geo_key=os.getenv('JSAPI_HTTPGEOCODER_KEY')
         )
     )
 
