@@ -6,10 +6,12 @@ from aiogram import F
 from aiogram.filters import CommandStart, Command
 
 from config import config
-from core.handlers.basic import get_start, get_photo, get_hello, get_location
+from core.handlers.basic import get_start, get_photo, get_hello, get_location, get_inline
 from core.handlers.contac import get_true_contact, get_fake_contact
+from core.handlers.callback import select_macbook
 from core.filters.iscontact import IsTrueContact
 from core.utils.commands import set_commands
+from core.utils.callbackdata import MacInfo
 
 
 async def start_bot(bot: Bot):
@@ -31,6 +33,8 @@ async def start():
     dp.startup.register(start_bot)
     dp.shutdown.register(stop_bot)
     dp.message.register(get_start, Command(commands=['start', 'run']))
+    dp.message.register(get_inline, Command(commands='inline'))
+    dp.callback_query.register(select_macbook, MacInfo.filter(F.model == 'pro'))
     dp.message.register(get_location, F.location)
     dp.message.register(get_hello, F.text.lower() == 'привет')
     dp.message.register(get_photo, F.photo)

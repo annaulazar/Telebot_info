@@ -13,6 +13,10 @@ async def set_commands(bot: Bot):
             description='Помощь'
         ),
         BotCommand(
+            command='inline',
+            description='Показать инлайн клавиатуру'
+        ),
+        BotCommand(
             command='cancel',
             description='Сбросить'
         )
