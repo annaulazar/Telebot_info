@@ -16,7 +16,10 @@ async def get_photo(message: Message, bot: Bot):
 
     await bot.download_file(file.file_path,
         f"downloaded_files/image_{message.from_user.id}_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.jpg")
-    # await bot.download_file(file.file_path, 'photo.jpg')
+
+
+async def get_hello(message: Message, bot: Bot):
+    await message.answer(f'И тебе {message.from_user.first_name} привет')
 
 
 

@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 @dataclass
 class Bots:
     bot_token: str
+    admin_id: str
 
 
 @dataclass
@@ -25,7 +26,8 @@ def get_config():
     load_dotenv()
     return Config(
         bot=Bots(
-            bot_token=os.getenv('BOT_TOKEN')
+            bot_token=os.getenv('BOT_TOKEN'),
+            admin_id=os.getenv('ADMIN_ID')
         ),
         apis=Apis(
             weather_key=os.getenv('Y.WEATHER_KEY'),
