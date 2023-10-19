@@ -1,12 +1,21 @@
+from datetime import datetime
+
 from aiogram import Bot
 from aiogram.types import Message
-from datetime import datetime
+
+from core.keyboards.reply import reply_keyboard, loc_tel_pol_keyboard, get_reply_keyboard
 
 
 async def get_start(message: Message, bot: Bot):
     # await bot.send_message(message.from_user.id, f'<b>Привет, {message.from_user.first_name}</b>')
-    await message.answer(f'<b>Привет {message.from_user.first_name}. Что интересует?</b>')
     # await message.reply(f'<tg-spoiler>Привет {message.from_user.first_name}</tg-spoiler>')
+    await message.answer(f'<b>Привет {message.from_user.first_name}. Что интересует?</b>',
+                         reply_markup=get_reply_keyboard())
+
+
+async def get_location(message: Message, bot: Bot):
+    await message.answer(f'{message.from_user.first_name} отправил локацию\r\a'
+                         f'{message.location.latitude}\r\n{message.location.longitude}')
 
 
 async def get_photo(message: Message, bot: Bot):

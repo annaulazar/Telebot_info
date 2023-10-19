@@ -6,7 +6,7 @@ from aiogram import F
 from aiogram.filters import CommandStart, Command
 
 from config import config
-from core.handlers.basic import get_start, get_photo, get_hello
+from core.handlers.basic import get_start, get_photo, get_hello, get_location
 from core.handlers.contac import get_true_contact, get_fake_contact
 from core.filters.iscontact import IsTrueContact
 from core.utils.commands import set_commands
@@ -31,6 +31,7 @@ async def start():
     dp.startup.register(start_bot)
     dp.shutdown.register(stop_bot)
     dp.message.register(get_start, Command(commands=['start', 'run']))
+    dp.message.register(get_location, F.location)
     dp.message.register(get_hello, F.text.lower() == 'привет')
     dp.message.register(get_photo, F.photo)
     dp.message.register(get_true_contact, F.contact, IsTrueContact())
